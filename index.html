@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Journey Roadmap</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #133a7c;
+            --secondary-blue: #47A8E5;
+            --bg-color: #f5f7fa;
+            --line-color: #d1d9e6;
+            --text-color: #333;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        /* --- TIMELINE CONTAINER --- */
+        .roadmap-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* The Vertical Line */
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px; /* Adjust based on circle size */
+            width: 4px;
+            background: var(--line-color);
+            z-index: 0;
+            border-radius: 2px;
+        }
+
+        /* --- ROADMAP ITEMS --- */
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 70px; /* Space for the marker */
+        }
+
+        /* The Marker (Circle) */
+        .roadmap-marker {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 52px;
+            height: 52px;
+            background-color: white;
+            border: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .roadmap-item.active .roadmap-marker {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* --- CONTENT CARD --- */
+        .roadmap-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        /* Header (Clickable) */
+        .roadmap-header {
+            background: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .roadmap-header:hover {
+            background-color: #fcfcfc;
+        }
+
+        .roadmap-title {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .roadmap-toggle-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-blue);
+            transition: transform 0.3s ease;
+        }
+
+        /* Content Area (Hidden by default) */
+        .roadmap-content {
+            padding: 20px;
+            display: none; /* Hidden state */
+            background-color: #fff;
+        }
+
+        /* Active State logic */
+        .roadmap-item.open .roadmap-content {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .roadmap-item.open .roadmap-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* --- RESPONSIVE FIXES FOR YOUR CONTENT --- */
+        /* Ensure inserted images don't overflow */
+        .roadmap-content img, 
+        .roadmap-content div[data-widget-type="HeroImage"] {
+            max-width: 100% !important;
+            height: auto !important;
+            border-radius: 8px;
+        }
+
+        /* Fix specific staffbase grid to be 1 column on mobile */
+        @media (max-width: 600px) {
+            div[data-widget-conf-grid-type="66-33"] {
+                display: flex;
+                flex-direction: column;
+            }
+            div[data-widget-conf-grid-type="66-33"] > div {
+                width: 100% !important;
+                margin-bottom: 15px;
+            }
+            
+            .roadmap-container::before { left: 18px; }
+            .roadmap-marker { width: 40px; height: 40px; font-size: 14px; }
+            .roadmap-item { padding-left: 55px; }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="roadmap-container">
+
+    <div class="roadmap-item open">
+        <div class="roadmap-marker">01</div>
+        <div class="roadmap-card">
+            <div class="roadmap-header" onclick="toggleItem(this)">
+                <h3 class="roadmap-title">Day 1: Welcome & Safety</h3>
+                <span class="roadmap-toggle-icon">▼</span>
+            </div>
+            <div class="roadmap-content">
+                <div data-widget-type="HeroImage" data-widget-conf-mobile-zone="49.888888888888886" data-widget-conf-background-image-url="https://showcase.staffbase.com/api/media/secure/external/v2/image/upload/695be6aaf17bc418e497aaaf.jpg" data-widget-conf-crop-origin-x="0" data-widget-conf-crop-origin-y="857" data-widget-conf-crop-width="5000" data-widget-conf-crop-height="1667" data-widget-conf-background-overlay-color="rgba(255, 255, 255, 0.55)" data-widget-on-card="true" data-widget-src="internal://staffbase.content.widgets.HeroImage"><div data-heading="">
+                  <p><span style="color: #133a7c;">Welcome {{user.profile.firstName}},</span></p>
+                  </div><div data-description="">
+                  <p><span style="color: #133a7c;"><strong>It's great to have you with us!</strong></span></p>
+                  </div></div>
+                <p>&nbsp;</p>
+                <div data-widget-on-card="false" data-widget-type="Section" data-widget-conf-grid-type="66-33" data-widget-src="internal://staffbase.content.widgets.Section"><div>
+                  <div data-widget-title="Safety is our heritage" data-widget-conf-design="2" data-widget-conf-background-color="#ffffff" data-widget-on-card="false" data-widget-type="StaticContent" data-widget-src="internal://staffbase.content.widgets.StaticContent">
+                    <p>Welcome to the team. You’re joining a legacy of builders who keep the world moving.</p>
+                    <p>Before you step onto the floor, know this: <b data-index-in-node="43" data-path-to-node="3,1,2,3">Production never takes priority over your safety.</b> We look out for each other here. This week is about getting your gear right and knowing your zones. We want you heading home to your family in the exact same condition you arrived.<br><br>Take a look at the Safety Pledge below:</p>
+                    <div class="mceNonEditable attachment with-size pdf" href="https://forrester2026.staffbase.com/api/media/secure/external/v2/raw/upload/6957f7406e7523575ed218f8.pdf"><span class="preview" style="background-image: url('https://forrester2026.staffbase.com/api/media/secure/external/v2/raw/upload/t_preview/6957f7406e7523575ed218f8.png'); display:block; height:150px; background-size:cover; background-position:center;"></span><span class="inner"><span class="type">PDF</span><span class="title">NEW_JERSEY_PLANT_SAFETY_COMMITMENT.pdf</span><span class="size">53.3 KB</span></span><span class="blocker"></span></div>
+                    <div data-widget-conf-secondary-column-mode="true" data-widget-title="Quicklinks" data-widget-conf-type="tiles" data-widget-conf-design="2" data-widget-type="QuickLinks" data-widget-conf-tile-bg-color="#f3f3f3" data-widget-conf-tile-text-color="#000000" data-widget-conf-open-in-mobile-browser="false" data-widget-src="internal://staffbase.content.widgets.QuickLinks"><ul><li><span class="icon we-icon">A</span><a href="https://staffbase.com/en/" data-title="App Settings" tabindex="0">App Settings</a></li><li><span class="icon we-icon">?</span><a href="https://staffbase.com/en/" data-title="Support / FAQ" tabindex="0">Support / FAQ</a></li><li><span class="icon we-icon">h</span><a href="https://staffbase.com/en/" data-title="Netiquette" tabindex="0">Netiquette</a></li></ul></div>
+                    <p><strong>&nbsp;</strong></p>
+                  </div>
+                  </div>
+                  <div>
+                    <div data-widget-conf-design="2" data-widget-conf-background-color="#ffffff" data-widget-on-card="true" data-widget-title="Your Profile" data-widget-type="StaticContent" data-widget-src="internal://staffbase.content.widgets.StaticContent">
+                      <div data-widget-conf-design="2" data-widget-conf-background-color="#ffffff" data-widget-on-card="false" data-widget-type="StaticContent" data-widget-src="internal://staffbase.content.widgets.StaticContent">
+                        <p style="text-align: center;">{{user.profile.avatar-100}}</p>
+                        <p style="text-align: center;">Name:&nbsp;<br>{{user.profile.firstName}} {{user.profile.lastName}}<br><br>Location:<br>{{user.profile.location}}<br><br>Department:<br>{{user.profile.department}}</p>
+                      </div>
+                      <div data-widget-conf-href="https://app.staffbase.com/profile/" data-widget-type="Button" data-widget-conf-bg-color="#133a7c" data-widget-conf-text-color="#ffffff" data-widget-conf-open-in-mobile-browser="false" data-widget-src="internal://staffbase.content.widgets.Button">Update profile</div>
+                    </div>
+                  </div></div>
+                </div>
+        </div>
+    </div>
+
+    <div class="roadmap-item">
+        <div class="roadmap-marker">02</div>
+        <div class="roadmap-card">
+            <div class="roadmap-header" onclick="toggleItem(this)">
+                <h3 class="roadmap-title">Week 1: Rhythm of the Line</h3>
+                <span class="roadmap-toggle-icon">▼</span>
+            </div>
+            <div class="roadmap-content">
+                <div data-widget-conf-grid-type="66-33" data-widget-type="Section" data-widget-on-card="false" data-widget-src="internal://staffbase.content.widgets.Section"><div>
+                  <div data-widget-type="StaticContent" data-widget-on-card="false" data-widget-conf-background-color="#ffffff" data-widget-conf-design="2" data-widget-title="The plant is big, but your team is small. You've been assigned to Shift B." data-widget-src="internal://staffbase.content.widgets.StaticContent">
+                    <p>Your Shift Supervisor is your go-to for questions, but your "Line Buddy" is there to help you learn the ropes without the pressure. Take this week to learn the rhythm of the line—don't rush, just observe the flow.</p>
+                    <p><strong>Stay safe and welcome to the team. We're so glad you're here!</strong></p>
+                  </div>
+                  <div data-widget-type="UserProfile" data-widget-on-card="true" data-widget-conf-user-id="691266709fd60b3f558f2893" data-widget-title="Your Line Buddy" data-widget-src="internal://staffbase.content.widgets.UserProfile"></div>
+                  <div data-widget-type="UserProfile" data-widget-on-card="true" data-widget-conf-user-id="691266725f852541f819aa5b" data-widget-title="Your Shift Supervisor" data-widget-src="internal://staffbase.content.widgets.UserProfile"></div>
+                  <embedded-block url="https://ebwilk.github.io/Forrester-Shift-Schedule/" height="600" height-mobile="400" enable-interaction="true" enable-scrolling="true" allow-fullscreen="false"></embedded-block></div>
+                  <div>
+                    <div data-widget-conf-design="2" data-widget-conf-background-color="#ffffff" data-widget-on-card="false" data-widget-title="The Rest of Your Shift Crew:" data-widget-type="StaticContent" data-widget-src="internal://staffbase.content.widgets.StaticContent">
+                      <div data-widget-type="UserProfile" data-widget-on-card="true" data-widget-conf-user-id="691266695f852541f819a9da" data-widget-src="internal://staffbase.content.widgets.UserProfile"></div>
+                      <div data-widget-type="UserProfile" data-widget-on-card="true" data-widget-conf-user-id="6912666e9fd60b3f558f286a" data-widget-src="internal://staffbase.content.widgets.UserProfile"></div>
+                      <div data-widget-type="UserProfile" data-widget-on-card="true" data-widget-conf-user-id="691266793d76c64c3c272787" data-widget-src="internal://staffbase.content.widgets.UserProfile"></div>
+                    </div>
+                    <p>&nbsp;</p>
+                  </div></div>
+                </div>
+        </div>
+    </div>
+
+    <div class="roadmap-item">
+        <div class="roadmap-marker">03</div>
+        <div class="roadmap-card">
+            <div class="roadmap-header" onclick="toggleItem(this)">
+                <h3 class="roadmap-title">Month 1: 30-Day Pulse Check</h3>
+                <span class="roadmap-toggle-icon">▼</span>
+            </div>
+            <div class="roadmap-content">
+                <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 100%;">
+                  <div style="background-color: #003478; color: #ffffff; padding: 20px 24px; border-bottom: 4px solid #47A8E5;">
+                    <h2 style="margin: 0; font-size: 22px; font-weight: 600;"><span style="color: #ffffff;">Your First Month: How Are We Doing?</span></h2>
+                    <p style="margin: 6px 0 0; font-size: 14px; opacity: 0.9;"><span style="color: #ffffff;">30-Day Pulse Check • Confidential Feedback</span></p>
+                  </div>
+                  <div style="display: flex; flex-wrap: wrap;">
+                    <div style="flex: 1 1 400px; padding: 30px 24px;">
+                      <h3 style="margin-top: 0; color: #333; font-size: 18px;"><span style="color: #081534;">Your Voice Matters.</span></h3>
+                      <p style="color: #555; line-height: 1.6; font-size: 15px;"><span style="color: #081534;">You’ve made it to the 30-day mark. You know the rhythm, you know the team, and you’re becoming a vital part of our output.</span></p>
+                      <p style="color: #555; line-height: 1.6; font-size: 15px;"><span style="color: #081534;">Now, we want to hear from <strong>you</strong>. Are we supporting you enough? Do you have the tools you need? Your honesty helps us make this plant a better place to work.</span></p>
+                      <p>&nbsp;</p>
+                      <div data-widget-type="Button" data-widget-conf-href="https://showcase.staffbase.com/content/surveys/695bef5bfccc8e5de5b24b23" data-widget-conf-open-in-mobile-browser="false" data-widget-conf-bg-color="#133a7c" data-widget-conf-text-color="#ffffff" data-widget-src="internal://staffbase.content.widgets.Button">Take the 2-Minute Survey</div>
+                      <p style="margin-top: 15px; font-size: 12px; color: #888; font-style: italic;">* This survey is sent directly to the Plant HR Manager.</p>
+                    </div>
+                    <div style="flex: 1 1 300px; min-height: 250px; background-color: #f4f4f4; position: relative;"><img style="width: 100%; height: 100%; object-fit: cover; display: block;" src="https://forrester2026.staffbase.com/api/media/secure/external/v2/image/upload/69581073753cf103441fd9ae.jpg" alt="Team members talking"></div>
+                  </div>
+                  <div style="background-color: #f9f9f9; padding: 15px 24px; border-top: 1px solid #eeeeee;">
+                    <div style="display: flex; align-items: center;">
+                      <div style="margin-right: 15px; font-size: 24px;">🚀</div>
+                      <div><span style="color: #081534;"><strong style="font-size: 14px;">Coming Up Next:</strong> <span style="font-size: 14px;"> After the survey, unlock the "Skill Up" training catalog.</span></span></div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleItem(element) {
+        // Find the parent .roadmap-item
+        const item = element.closest('.roadmap-item');
+        
+        // Toggle the class 'open'
+        if (item.classList.contains('open')) {
+            item.classList.remove('open');
+        } else {
+            // Optional: Close others when opening one? 
+            // Uncomment the lines below if you want "Accordion" style (only 1 open at a time)
+            /*
+            document.querySelectorAll('.roadmap-item').forEach(i => {
+                i.classList.remove('open');
+            });
+            */
+            item.classList.add('open');
+        }
+    }
+</script>
+
+</body>
+</html>
